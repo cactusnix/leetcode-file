@@ -26,6 +26,8 @@
  *
  *
  */
+
+// @lc code=start
 func twoSum(nums []int, target int) []int {
   if len(nums) > 0 {
     length := len(nums)
@@ -42,4 +44,5 @@ func twoSum(nums []int, target int) []int {
   }
   return nil
 }
+// @lc code=end
 
