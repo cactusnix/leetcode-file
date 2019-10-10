@@ -37,7 +37,7 @@
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
   temp1, temp2 := l1, l2
   for !temp1 && !temp2 {
-    
+
   }
 }
 
