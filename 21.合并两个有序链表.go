@@ -32,48 +32,50 @@
  * }
  */
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-  if l1 == nil && l2 != nil {
-    return l2
-  }
-  if l1 != nil && l2 == nil {
-    return l1
-  }
-  if l1 == nil && l2 == nil {
-    return nil
-  }
-  var l3 *ListNode
-  var l4 *ListNode
-  if l2.Val >= l1.Val {
-    l3 = l1
-    l4 = l2
-  } else {
-    l3 = l2
-    l4 = l1
-  }
-  for l4 != nil {
-    fmt.Println("l2 Val", l4.Val)
-    // 不改变l1的指向，这样就可以返回，这里是引用，所以会修改l1的指向
-    l5 := l3
-    for l5 != nil {
-      fmt.Println("l1 Val", l5.Val)
-      if l4.Val >= l5.Val {
-        if l5.Next == nil {
-          fmt.Println("当前的l1", l5.Val)
-          temp := &ListNode{l4.Val, nil}
-          l5.Next = temp
-          break
-        } else if l4.Val <= l5.Next.Val {
-          fmt.Println("当前的l1", l5.Val)
-          temp := &ListNode{l4.Val, l5.Next}
-          l5.Next = temp
-          break
-        }
-      }
-      l5 = l5.Next
-    }
-    l4 = l4.Next
-  }
-  return l3
+	if l1 == nil && l2 != nil {
+		return l2
+	}
+	if l1 != nil && l2 == nil {
+		return l1
+	}
+	if l1 == nil && l2 == nil {
+		return nil
+	}
+	var l3 *ListNode
+	var l4 *ListNode
+	if l2.Val >= l1.Val {
+		l3 = l1
+		l4 = l2
+	} else {
+		l3 = l2
+		l4 = l1
+	}
+	for l4 != nil {
+		fmt.Println("l2 Val", l4.Val)
+		// 不改变l1的指向，这样就可以返回，这里是引用，所以会修改l1的指向
+		l5 := l3
+		for l5 != nil {
+			fmt.Println("l1 Val", l5.Val)
+			if l4.Val >= l5.Val {
+				if l5.Next == nil {
+					fmt.Println("当前的l1", l5.Val)
+					temp := &ListNode{l4.Val, nil}
+					l5.Next = temp
+					l5 = l5.Next
+					break
+				} else if l4.Val <= l5.Next.Val {
+					fmt.Println("当前的l1", l5.Val)
+					temp := &ListNode{l4.Val, l5.Next}
+					l5.Next = temp
+					l5 = l5.Next
+					break
+				}
+			}
+			l5 = l5.Next
+		}
+		l4 = l4.Next
+	}
+	return l3
 }
 // @lc code=end
 
@@ -81,5 +83,6 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 /*
 思路是正确的，却被指针的坑搞晕了。
 指针真的搞晕了。内存占用过大，不停拷贝指针的副本。
+可优化的部分，抓住有序，不需要从头遍历。已实现。似乎没有优化。
 暂存
 */
