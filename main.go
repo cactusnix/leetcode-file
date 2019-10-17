@@ -13,11 +13,31 @@ type ListNode struct {
 
 // use this to debug local
 func main() {
+  test := []int{0,0,1,1,1}
+  fmt.Println(removeDuplicates(test))
+  fmt.Println(test)
+}
+
+func test() {
   var l1 *ListNode
   var l2 *ListNode
   l1 = &ListNode{2, &ListNode{4, &ListNode{4, nil}}}
   l2 = &ListNode{1, &ListNode{3, &ListNode{4, nil}}}
   fmt.Println(mergeTwoLists(l1, l2).Next.Next.Next.Val)
+}
+
+func removeDuplicates(nums []int) int {
+  count := 0
+	n := len(nums)
+	for i := 1; i < len(nums); i++ {
+		if nums[i] != nums[i-1] {
+			nums[i-count] = nums[i]
+		} else {
+			count++
+		}
+  }
+  fmt.Println(nums)
+	return n - count
 }
 
 // 合并两个有序链表
