@@ -13,11 +13,22 @@ type ListNode struct {
 
 // use this to debug local
 func main() {
+  var input string = "qwer"
+  var val string = "er"
+  length := len(val)
+	for i := 0; i < len(input) + 1 - length; i++ {
+    fmt.Println(input[i:i+length])
+		if input[i:i+length] == val {
+			fmt.Println(i) 
+		}
+  }
+}
+
+func testRemove() {
   test := []int{0,0,1,1,1}
   fmt.Println(removeDuplicates(test))
   fmt.Println(test)
 }
-
 func test() {
   var l1 *ListNode
   var l2 *ListNode
