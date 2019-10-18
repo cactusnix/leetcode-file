@@ -1,2 +1,5 @@
 # 忽略vscode生成的文件夹
 /.vscode
+
+# 忽律工作区配置
+/*.code-workspace
