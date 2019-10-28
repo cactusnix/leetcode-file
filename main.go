@@ -13,6 +13,11 @@ type ListNode struct {
 
 // use this to debug local
 func main() {
+  input := []int{-2,1,-3}
+  maxSubArray(input)
+}
+
+func test2() {
   var input string = "qwer"
   var val string = "er"
   length := len(val)
@@ -22,6 +27,23 @@ func main() {
 			fmt.Println(i) 
 		}
   }
+}
+func maxSubArray(nums []int) int {
+	length := len(nums)
+	result := 0
+  for i := length; i > 0; i-- {
+		for j := 0; j < length - i + 1; j++ {
+			temps := nums[j:j+i]
+			tempResult := 0
+			for _, temp := range temps {
+				tempResult += temp
+			}
+			if tempResult > result {
+				result = tempResult
+			}
+		}
+	}
+	return result
 }
 
 func testRemove() {
