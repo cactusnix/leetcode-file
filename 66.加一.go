@@ -1,3 +1,5 @@
+import "strconv"
+
 /*
  * @lc app=leetcode.cn id=66 lang=golang
  *
@@ -34,22 +36,61 @@
  *
  *
  */
+// @lc code=start
 func plusOne(digits []int) []int {
-  str := ""
-  for i := 0; i < len(digits); i++ {
-    str += strconv.Itoa(digits[i])
+  // 思路二
+  index := len(digits) - 1
+  carry := 1
+  for i := index; i >= 0; i-- {
+    num := digits[i]
+    if num + carry <= 9 {
+      digits[i] = num + carry
+      return digits
+    } else {
+      if i == 0 {
+        digits[i] = (num + carry) % 10
+        carry = (num + carry) / 10
+        temp := []int{carry}
+        digits = append(temp, digits...)
+        return digits
+      }
+      digits[i] = (num + carry) % 10
+      carry = (num + carry) / 10
+      continue
+    }
   }
-  r := 0
-  temp, err := strconv.Atoi(str)
-  if err != nil {
-    return nil
-  } else {
-    r = temp + 1
-  }
-  var result []int
-  for i := 0; i < len(strconv.Itoa(r)); i++ {
-    result = result.append(r % 10, result...)
-    r = r / 10
-  }
+  return digits
 }
+
+// @lc code=end
+
+// @Tips
+/*
+思路一
+数组变成数字，相加之后，再变成数组,
+思路错误，数组过长的时候，导致了不够存储
+func plusOne(digits []int) []int {
+	str := ""
+	for i := 0; i < len(digits); i++ {
+		str += strconv.Itoa(digits[i])
+	}
+	r := 0
+	temp, err := strconv.Atoi(str)
+	if err != nil {
+		return nil
+	} else {
+		r = temp + 1
+	}
+	// 头部插入
+	var result []int
+  for r > 0 {   
+    num := []int{r % 10}
+		result = append(num, result...)
+		r = r / 10
+  }
+	return result
+}
+思路二
+只把最后一个变成数字，相加，考虑进位以及数组扩容
+*/
 
